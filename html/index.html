@@ -16,7 +16,7 @@
         <div class="form-row">
           <div class="col-md-4 mb-3">
             <label for="empid">Employee ID</label>
-            <input type="text" class="form-control w-100" name="empid" id="empid" placeholder="ID" readonly>
+            <input type="text" class="form-control w-100" name="empid" id="empid" placeholder="" readonly, disabled>
           </div>
           <div class="col-md-4 mb-3">
             <label for="first_name">First name</label>
@@ -45,7 +45,7 @@
             </div>
           </div>
         </div>
-        <button type="submit" class="btn btn-dark" onclick="add_record()">Add Employe</button>
+        <button type="submit" class="btn btn-dark" onclick="add_record()">Add Employee</button>
         <button type="reset" class="btn btn-outline-primary">Clear</button>
       </form>
         </div>
@@ -85,7 +85,7 @@
     <script>
       $(document).ready(function() {
           $.ajax({
-              url: "http://finalnatalaga.test/employee",
+              url: "http://final.test/employ",
               type: "GET", 
               success: function(response) {
                   txt = "";
@@ -123,7 +123,7 @@
             }
             $(document).ready(function() {
                   $.ajax({
-                      url: "http://finalnatalaga.test/employee/add",
+                      url: "http://final.test/employ/add",
                       type: "POST",
                       data: JSON.stringify(data),
                       success: function(response) {
@@ -136,7 +136,7 @@
         
       function select_record(id) {
             $.ajax({
-                url: `http://finalnatalaga.test/employee/${id}`,
+                url: `http://final.test/employ/${id}`,
                 type: "GET",
                 success: function(response) {
                     var txt = "";
@@ -162,31 +162,31 @@
 
                 }
             });
-        }
-        function update_record(){
-          const empid = document.getElementById("empid").value
-          var data = {
-                first_name : document.getElementById("first_name").value,
-                mid_add : document.getElementById("mid_add").value,
-                last_name : document.getElementById("last_name").value,
-                contact_num : document.getElementById("contact_num").value,
-                email_add : document.getElementById("email_add").value,
-                address : document.getElementById("address").value,
-          };
-          $.ajax({
-              url: `http://finalnatalaga.test/employee/update/${empid}`,
-              type: "PUT",
-              data: JSON.stringify(data),
-              complete: function(response) {
-                alert("Record Updated");
-                window.location.href = 'index.html';
-              },
-          });
       }
+      function update_record(){
+        const empid = document.getElementById("empid").value
+        var data = {
+              first_name : document.getElementById("first_name").value,
+              mid_add : document.getElementById("mid_add").value,
+              last_name : document.getElementById("last_name").value,
+              contact_num : document.getElementById("contact_num").value,
+              email_add : document.getElementById("email_add").value,
+              address : document.getElementById("address").value,
+        };
+        $.ajax({
+            url: `http://final.test/employ/update/${empid}`,
+            type: "PUT",
+            data: JSON.stringify(data),
+            complete: function(response) {
+              alert("Record Updated");
+              window.location.href = 'index.html';
+            },
+        });
+    }
         function delete_record() {
             empid = document.getElementById("empid").value
             $.ajax({
-                url: `http://finalnatalaga.test/employee/delete/${empid}`,
+                url: `http://final.test/employ/delete/${empid}`,
                 type: "DELETE",
                 complete: function(response) {
                   alert("Record Deleted");
